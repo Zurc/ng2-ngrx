@@ -1,7 +1,7 @@
 import {Observable} from "rxjs/Observable";
 import {Store} from '@ngrx/store';
 import {Component} from '@angular/core'
-import {WidgetsService} from './../common/services/widgets.service.ts';
+import {WidgetsService} from './../common/services/widgets.service';
 import {WidgetsList} from './widgets-list.component';
 import {WidgetDetails} from './widget-details.component';
 import {AppStore} from "../common/models/appstore.model";
@@ -34,9 +34,10 @@ export class Widgets {
   widgets = [];
   selectedWidget: Observable<Widget>;
 
-  constructor(private _widgetsService: WidgetsService,
+  constructor(
+    private _widgetsService: WidgetsService,
     private _store: Store<AppStore>) {
-    this.selectedWidget = _store.select('selectedWidget');
+    this.selectedWidget = _store.select<Widget>('selectedWidget');
 
     _widgetsService.loadWidgets()
       .subscribe(

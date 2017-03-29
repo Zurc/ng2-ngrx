@@ -15,14 +15,37 @@ export class ItemsService {
   items: Observable<Array<Item>>;
 
   constructor(private http: Http, private store: Store<AppStore>) {
-    this.items = store.select('items');
+    this.items = store.select<Item[]>('items');
   }
 
   loadItems() {
-    this.http.get(BASE_URL)
-      .map(res => res.json())
-      .map(payload => ({ type: 'ADD_ITEMS', payload }))
-      .subscribe(action => this.store.dispatch(action));
+    // this.http.get(BASE_URL)
+    //   .map(res => res.json())
+    //   .map(payload => ({ type: 'ADD_ITEMS', payload }))
+    //   .subscribe(action => this.store.dispatch(action));
+    let initialItems: Item[] = [
+      {
+      "id": 1,
+      "name": "Item 1",
+      "description": "This is a description"
+    },
+    {
+      "id": 2,
+      "name": "Item 2",
+      "description": "This is a description"
+    },
+    {
+      "id": 3,
+      "name": "Item 3",
+      "description": "This is a lovely item"
+    },
+    {
+      "name": "hghg",
+      "description": "gfhg",
+      "id": 4
+    }
+    ];
+    this.store.dispatch({type: 'ADD_ITEMS', payload: initialItems})
   }
 
   saveItem(item: Item) {
