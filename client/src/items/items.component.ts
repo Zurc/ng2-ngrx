@@ -15,6 +15,7 @@ import {GadgetService} from '../common/services/gadget.service'
   template: `
   <div class="mdl-grid items">
     <div class="mdl-cell mdl-cell--6-col">
+      <!-- pass items array to item-list (child) --> 
       <items-list [items]="items | async"
         (selected)="selectItem($event)" (deleted)="deleteItem($event)">
       </items-list>
@@ -51,7 +52,7 @@ export class Items {
 
     this.gadget = gadgetService.gadget;
 
-    itemsService.loadItems();
+    itemsService.loadItems();// "itemsService.loadItems" dispatches the "ADD_ITEMS" event to our store which in turn updates the "items" collection
   }
 
   resetItem() {

@@ -22,6 +22,7 @@ import {Item} from '../common/models/item.model';
   `
 })
 export class ItemsList {
+  // pick up items array comming from items component (parent)
   @Input() items: Item[];
   @Output() selected = new EventEmitter();
   @Output() deleted = new EventEmitter();
